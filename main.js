@@ -103,4 +103,21 @@ function createPostCard(post) {
     postHeader.appendChild(postMeta);
   
     postElement.appendChild(postHeader);
+
+    const postText = document.createElement('div');
+    postText.classList.add('post__text');
+    postText.textContent = post.content;
+    postElement.appendChild(postText);
   
+    // condizione
+    if (post.image) {
+        const postImage = document.createElement('div');
+        postImage.classList.add('post__image');
+    
+        const imageElement = document.createElement('img');
+        imageElement.src = post.image;
+        imageElement.alt = 'Post Image';
+        postImage.appendChild(imageElement);
+    
+        postElement.appendChild(postImage);
+      }
