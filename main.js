@@ -57,3 +57,50 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
+
+//Aggiungo classe al container e creo card
+
+function createPostCard(post) {
+    const container = document.getElementById('container');
+  
+    const postElement = document.createElement('div');
+    postElement.classList.add('post');
+  
+    // Costruisci l'header del post
+    const postHeader = document.createElement('div');
+    postHeader.classList.add('post__header');
+  
+    const postMeta = document.createElement('div');
+    postMeta.classList.add('post-meta');
+  
+    const postMetaIcon = document.createElement('div');
+    postMetaIcon.classList.add('post-meta__icon');
+  
+    const profilePic = document.createElement('img');
+    profilePic.classList.add('profile-pic');
+    profilePic.src = post.media;
+    profilePic.alt = post.author.name;
+  
+    postMetaIcon.appendChild(profilePic);
+  
+    const postMetaData = document.createElement('div');
+    postMetaData.classList.add('post-meta__data');
+  
+    const postMetaAuthor = document.createElement('div');
+    postMetaAuthor.classList.add('post-meta__author');
+    postMetaAuthor.textContent = post.author.name;
+  
+    const postMetaTime = document.createElement('div');
+    postMetaTime.classList.add('post-meta__time');
+    postMetaTime.textContent = post.created;
+  
+    postMetaData.appendChild(postMetaAuthor);
+    postMetaData.appendChild(postMetaTime);
+  
+    postMeta.appendChild(postMetaIcon);
+    postMeta.appendChild(postMetaData);
+  
+    postHeader.appendChild(postMeta);
+  
+    postElement.appendChild(postHeader);
+  
