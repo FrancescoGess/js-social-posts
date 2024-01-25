@@ -1,5 +1,3 @@
-//Creo le variabili
-
 const posts = [
     {
         "id": 1,
@@ -58,8 +56,7 @@ const posts = [
     }
 ];
 
-//Aggiungo classe al container e creo card
-
+// Funzione per creare e aggiungere dinamicamente una card post
 function createPostCard(post) {
     const container = document.getElementById('container');
   
@@ -103,21 +100,66 @@ function createPostCard(post) {
     postHeader.appendChild(postMeta);
   
     postElement.appendChild(postHeader);
-
+  
+    // Aggiungi il testo del post
     const postText = document.createElement('div');
     postText.classList.add('post__text');
     postText.textContent = post.content;
     postElement.appendChild(postText);
   
-    // condizione
+    // Aggiungi l'immagine del post se presente
     if (post.image) {
-        const postImage = document.createElement('div');
-        postImage.classList.add('post__image');
-    
-        const imageElement = document.createElement('img');
-        imageElement.src = post.image;
-        imageElement.alt = 'Post Image';
-        postImage.appendChild(imageElement);
-    
-        postElement.appendChild(postImage);
-      }
+      const postImage = document.createElement('div');
+      postImage.classList.add('post__image');
+  
+      const imageElement = document.createElement('img');
+      imageElement.src = post.image;
+      imageElement.alt = 'Post Image';
+      postImage.appendChild(imageElement);
+  
+      postElement.appendChild(postImage);
+    }
+  
+    // Aggiungi il footer del post con i like
+    const postFooter = document.createElement('div');
+    postFooter.classList.add('post__footer');
+  
+    const likesContainer = document.createElement('div');
+    likesContainer.classList.add('likes', 'js-likes');
+  
+    const likesCta = document.createElement('div');
+    likesCta.classList.add('likes__cta');
+  
+    const likeButton = document.createElement('a');
+    likeButton.classList.add('like-button', 'js-like-button');
+    likeButton.href = '#';
+    likeButton.dataset.postid = post.id;
+  
+    const likeIcon = document.createElement('i');
+    likeIcon.classList.add('like-button__icon', 'fas', 'fa-thumbs-up');
+  
+    const likeLabel = document.createElement('span');
+    likeLabel.classList.add('like-button__label');
+    likeLabel.textContent = 'Mi Piace';
+  
+    likeButton.appendChild(likeIcon);
+    likeButton.appendChild(likeLabel);
+    likesCta.appendChild(likeButton);
+  
+    const likesCounter = document.createElement('div');
+    likesCounter.classList.add('likes__counter');
+    likesCounter.innerHTML = `Piace a <b id="like-counter-${post.id}" class="js-likes-counter">${post.likes}</b> persone`;
+  
+    likesContainer.appendChild(likesCta);
+    likesContainer.appendChild(likesCounter);
+  
+    postFooter.appendChild(likesContainer);
+    postElement.appendChild(postFooter);
+  
+    // Aggiungi la card del post al container
+    container.appendChild(postElement);
+  }
+  
+  // Itera attraverso l'array di post e crea le card
+  posts.forEach(createPostCard);
+  
